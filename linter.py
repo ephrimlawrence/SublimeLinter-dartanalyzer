@@ -6,10 +6,15 @@ logger = logging.getLogger('SublimeLinter.plugins.dartanalyzer')
 
 
 class DartAnalyzer(Linter):
-    cmd = ('dartanalyzer', '--options', '~/analysis_options.yaml', '.')
+    cmd = ('dartanalyzer', '--options', 'analysis_options.yaml', '.')
 
-    # TODO: improve message group
-    regex = r"^Analyzing|\d+|\s+((?P<warning>lint)|(?P<error>error))\s.\s(?P<message>[\w\s\w'].*)\sat\s([\w\|]+.dart:(?P<line>\d+):(?P<col>\d+))"
+    regex = (
+            r"(^Analyzing.*)|\s+"
+            r"((?P<warning>[lh]int)|(?P<error>error))"
+            r"\s.\s(?P<message>.*)"
+            r":(?P<line>\d{1,})"
+            r":(?P<col>\d{1})"
+        )
 
     multiline = False
     defaults = {
