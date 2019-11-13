@@ -6,8 +6,8 @@ logger = logging.getLogger('SublimeLinter.plugins.dartanalyzer')
 
 
 class DartAnalyzer(Linter):
-    cmd = ('dartanalyzer', '--options', 'analysis_options.yaml', '.')
 
+    cmd = ('dartanalyzer', '${args}',  '.')
     regex = (
             r"(^Analyzing.*)|\s+"
             r"((?P<warning>[lh]int)|(?P<error>error))"
